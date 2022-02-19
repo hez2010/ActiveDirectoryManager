@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Register";
+}
+@model RegisterViewModel
+
+<h1>Register</h1>
+
+<form asp-action="Register" method="post">
+    @if (!string.IsNullOrEmpty(Model?.Message))
+    {
+        <p>@Model.Message</p>
+    }
+    <div asp-validation-summary="All"></div>
+    <div class="form-group row">
+        <label asp-for="UserName" class="col-sm-1 col-form-label">Username</label>
+        <div class="col-sm-11" style="max-width: 400px">
+            <input type="text" class="form-control" asp-for="UserName" placeholder="Enter username, you will use username to login" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="FirstName" class="col-sm-1 col-form-label">First Name</label>
+        <div class="col-sm-11" style="max-width: 400px">
+            <input type="text" class="form-control" asp-for="FirstName" id="firstName" onchange="updateDisplayName()" placeholder="Enter first name" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="LastName" class="col-sm-1 col-form-label">Last Name</label>
+        <div class="col-sm-11" style="max-width: 400px">
+            <input type="text" class="form-control" asp-for="LastName" id="lastName" onchange="updateDisplayName()" placeholder="Enter last name" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="DisplayName" class="col-sm-1 col-form-label">Display Name</label>
+        <div class="col-sm-11" style="max-width: 400px">
+            <input type="text" class="form-control" asp-for="DisplayName" id="displayName" placeholder="Enter display name" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Email" class="col-sm-1 col-form-label">Email</label>
+        <div class="col-sm-11" style="max-width: 400px">
+            <input type="text" class="form-control" asp-for="Email" placeholder="Enter email address" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Password" class="col-sm-1 col-form-label">Password</label>
+        <div class="col-sm-11" style="max-width: 400px">
+            <input type="password" class="form-control" asp-for="Password" placeholder="Enter password" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="ConfirmPassword" class="col-sm-1 col-form-label">Confirm Password</label>
+        <div class="col-sm-11" style="max-width: 400px">
+            <input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="Enter password again" />
+        </div>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+@section Scripts {
+    <script>
+        function updateDisplayName() {
+            const firstName = document.querySelector('#firstName').value;
+            const lastName = document.querySelector('#lastName').value;
+
+            document.querySelector('#displayName').value = ((firstName || '') + ' ' + (lastName || '')).trim();
+        }
+    </script>
+}
